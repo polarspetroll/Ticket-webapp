@@ -28,6 +28,10 @@ CREATE TABLE tickets (
   password VARCHAR(100),
   sold BOOLEAN
 );
+CREATE TABLE tokens (
+  token_id VARCHAR(100) UNIQUE
+);
+
 
 ```
 
