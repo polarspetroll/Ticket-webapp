@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+  </head>
+  <body style="background-color:#2e2e2e;">
+    <div align="center">
+      <form method="POST">
+        <fieldset>
+          <br/>
+          <br/>
+          <br/>
+          <legend style="color:#d9c004;">Check Tickets</legend>
+          <div style="color:#d9c004;">Username: <input type="text" name="username" style="background-color:#2e2e2e;color:#ff05ee;" required></input></div>
+          <div style="color:#d9c004;">Password: <input type="password" name="password" style="background-color:#2e2e2e;color:#ff05ee;" required></input></div>
+          <div style="color:#d9c004;">Ticket ID:<input type="text" name="ticket"   style="background-color:#2e2e2e;color:#ff05ee;" required></input></div>
+          <br/>
+          <br/>
+          <br/>
+        </fieldset>
+        <br/>
+        <button style="background-color:#00fce3;color:black;">Search</button>
+      </form>
+    </div>
+    <br/>
+    <hr/>
+    <center><p style="color:cyan;">{{.}}</p></center>
+  </body>
+</html>
