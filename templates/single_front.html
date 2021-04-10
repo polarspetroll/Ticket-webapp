@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+</head>
+<body>
+
+
+<h1> DOWNLOAD YOUR FRONT TICKET (SINGLES) </h1>
+
+
+<h4 for="info">Enter the Display Name you want for your Single Ticket :</h4>
+
+  <input type="text" placeholder="Type Display Name" id="myCode">
+    <button type="button" onclick="get_image();">GET TICKET</button>
+    <br>
+    <br>
+
+
+
+<img id="myImage" >
+
+<div id="myDIV" >
+  Click Below To Download Your Ticket
+ 
+  <a href= "" >
+    <button class="btn" style="width:100%"><i class="fa fa-download"></i> Download</button>
+ </a>
+</div>
+</body>
+
+<script>
+var text
+var success = 0
+var link
+var ff 
+
+status()
+
+
+
+function status() {
+  ff = document.getElementById("myImage")
+  console.log(ff)
+if (success === 0) {
+ console.log("This 0 .. No sucess ")
+ console.log(success);
+  document.getElementById("myDIV").style.display = "none";
+}
+
+if (success === 1)  {
+  console.log("this 1.. Sucess atained ")
+  document.getElementById("myDIV").style.display = "block";
+
+}
+}
+
+function get_code() {
+  
+
+  text = document.getElementById("myCode").value;
+  console.log(text)
+}
+ function get_image() {
+
+ get_code(); 
+ 
+var myImage = document.querySelector('img');
+var image = "https://fidebleb.sirv.com/Images/TICKET%20SAMPLE.jpg"
+
+fetch(`https://textoverimage.moesif.com/image?image_url=${image}&y_align=bottom&margin=1&text=${text}&text_color=ffffffff&text_size=16&x_align=right\n`).then(function(response) {
+  return response.blob();
+}).then(function(myBlob) {
+  var objectURL = URL.createObjectURL(myBlob);
+  myImage.src = objectURL;
+  link = objectURL
+  success = 1
+  console.log("Just sucessed ")
+  document.getElementById("myDIV").style.display = "block";
+  status();
+});
+
+
+ }
+
+ 
+
+
+</script>
+</html> 
+
