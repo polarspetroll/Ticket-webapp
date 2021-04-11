@@ -110,3 +110,35 @@ func AdminIndex(w http.ResponseWriter, r *http.Request) {
   Template := template.Must(template.ParseGlob("templates/admin.html"))
   Template.Execute(w, "")
 }
+
+func Delete(w http.ResponseWriter, r *http.Request) {
+  tmp, _ := template.ParseFiles("templates/delete.html")
+  if r.Method == "GET" {
+    tmp.Execute(w, "")
+  }else if r.Method == "POST" {
+    r.ParseForm()
+    ticket = r.PostForm.Get("ticket")
+    db, err := sql.Open("mysql", DBcreds)
+    if err != nil {
+      fmt.Fprintf(w, `<script>window.location.href = "/500";</script>`)
+      return
+    }
+    q, err := db.Query("SELECT ticket FROM tickets WHERE ticket=?", ticket)
+    if err != nil {
+      fmt.Fprintf(w, `<script>window.location.href = "/500";</script>`)
+      return
+    }
+    if q.Next() == true {
+      _, err := db.Query("DELETE FROM tickets WHERE ticket=?", ticket)
+      if err != nil {
+        fmt.Fprintf(w, `<script>window.location.href = "/500";</script>`)
+        return
+      }
+      tmp.Execute(w, "Done!")
+    }else if q.Next() == false {
+      tmp.Execute(w, "ticket doesn't exist")
+      return
+    }
+    db.Close()
+  }
+}
