@@ -26,6 +26,7 @@ func main() {
   http.HandleFunc("/admin/check_in", admin.CheckIn)
   http.HandleFunc("/admin/ticket_verify/", admin.Admin)
   http.HandleFunc("/admin/token/", admin.TokenInsert)
+  http.HandleFunc("/admin/delete", admin.Delete)
   http.ListenAndServe(":8080", nil)
                         //// You can change the listener port here
 }
