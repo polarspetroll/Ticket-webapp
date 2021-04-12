@@ -9,7 +9,7 @@ import (
   "crypto/rand"
   "unsafe"
 )
-var name, username, password, DBcreds string
+var name, username, password, DBcreds, token string
 var alphabet = []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ12890")
 func Register(w http.ResponseWriter, r *http.Request) {
   Template := template.Must(template.ParseGlob("templates/register.html"))
@@ -19,7 +19,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
     name = r.PostForm.Get("name")
     username = r.PostForm.Get("username")
     password = r.PostForm.Get("password")
-    fmt.Println(r.PostForm.Get("User-Agent"))
+    token = r.PostForm.Get("token")
     if len(name) > 30 {
       fmt.Fprintf(w, `<script>alert("name is too long")</script>`)
       return
@@ -44,7 +44,11 @@ func Register(w http.ResponseWriter, r *http.Request) {
     }
     if res.Next() == true {
       fmt.Fprintf(w, `<script>alert("username exist");window.location.href = "/register";</script>`)
-      fmt.Println(err)
+      return
+    }
+    res, _ = DB.Query("SELECT * FROM tokens WHERE token_id=?", token)
+    if res.Next() == false {
+      fmt.Fprintf(w, `<script>alert("Invalid Token");window.location.href = "/register";</script>`)
       return
     }
     res.Close()
