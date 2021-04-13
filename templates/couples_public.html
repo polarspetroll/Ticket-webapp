@@ -9,10 +9,10 @@
 <body>
 
 
-<h1> DOWNLOAD YOUR FRONT TICKET (SINGLES) </h1>
+<h1>DOWNLOAD YOUR FRONT TICKET (COUPLES) </h1>
 
 
-<h4 for="info">Enter the Display Name you want for your Single Ticket :</h4>
+<h4 for="info">Enter the Display Name you want for your Couples Ticket :</h4>
 
   <input type="text" placeholder="Type Display Name" id="myCode">
     <button type="button" onclick="get_image();">GET TICKET</button>
@@ -60,7 +60,7 @@ if (success === 1)  {
 
 function get_code() {
   
-
+ 
   text = document.getElementById("myCode").value;
   console.log(text)
 }
@@ -69,7 +69,7 @@ function get_code() {
  get_code(); 
  
 var myImage = document.querySelector('img');
-var image = "https://fidebleb.sirv.com/Images/TICKET%20SAMPLE.jpg"
+var image = "https://fidebleb.sirv.com/tickets/Private_Couples.jpg"
 
 fetch(`https://textoverimage.moesif.com/image?image_url=${image}&y_align=bottom&margin=1&text=${text}&text_color=ffffffff&text_size=16&x_align=right\n`).then(function(response) {
   return response.blob();
@@ -77,6 +77,7 @@ fetch(`https://textoverimage.moesif.com/image?image_url=${image}&y_align=bottom&
   var objectURL = URL.createObjectURL(myBlob);
   myImage.src = objectURL;
   link = objectURL
+
   success = 1
   console.log("Just sucessed ")
   document.getElementById("myDIV").style.display = "block";
