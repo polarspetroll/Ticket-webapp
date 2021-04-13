@@ -71,7 +71,7 @@ function get_code() {
 var myImage = document.querySelector('img');
 var image = "https://fidebleb.sirv.com/tickets/Private_Couples.jpg"
 
-fetch(`https://textoverimage.moesif.com/image?image_url=${image}&y_align=bottom&margin=1&text=${text}&text_color=ffffffff&text_size=16&x_align=right\n`).then(function(response) {
+fetch(`https://textoverimage.moesif.com/image?image_url=${image}&y_align=bottom&margin=1&text=${text}&text_color=ff0000ff&text_size=16&x_align=right\n`).then(function(response) {
   return response.blob();
 }).then(function(myBlob) {
   var objectURL = URL.createObjectURL(myBlob);
