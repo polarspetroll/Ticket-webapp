@@ -11,12 +11,12 @@
 			<br/>
 			<div align="center">
 				<h1 style="color:pink;">Thanks for registration! Here's Your ticket</h1>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=21ccbb&bgcolor=000000&data={{ . }}">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=21ccbb&bgcolor=000000&data={{ .Qr }}">
         <br/>
         <br/>
         <br/>
         <br/>
-        <div><button onclick="window.location.href = 'https://ajrlaprtwq.cloudimg.io/v7/https://fidebleb.sirv.com/Images/Private_Single.jpg?width=900&w=600&wat=1&wat_url=https%3A%2F%2Fapi.qrserver.com%2Fv1%2Fcreate-qr-code%2F%3Fsize%3D300x300%26color%3D21ccbb%26bgcolor%3D000000%26data%3D{{ . }}&wat_scale=35&wat_gravity=southwest&wat_pad=62.3p,18.4p';">Download the full ticket</button></div>
+        <div><button onclick="window.location.href = 'https://ajrlaprtwq.cloudimg.io/v7/{{ .Src }}?width=900&w=600&wat=1&wat_url=https%3A%2F%2Fapi.qrserver.com%2Fv1%2Fcreate-qr-code%2F%3Fsize%3D300x300%26color%3D21ccbb%26bgcolor%3D000000%26data%3D{{ .Qr }}&wat_scale=35&wat_gravity=southwest&wat_pad=62.3p,18.4p';">Download the full ticket</button></div>
 				</div>
 			</body>
 		</html>
