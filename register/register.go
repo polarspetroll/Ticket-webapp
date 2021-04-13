@@ -96,8 +96,18 @@ func ForgetTicket(w http.ResponseWriter, r *http.Request) {
     Template.Execute(w, "")
   }else if r.Method == "POST" {
     r.ParseForm()
+    TicketType = r.PostForm.Get("type")
     username = r.PostForm.Get("username")
     password = r.PostForm.Get("password")
+    tk := Ticket{Src: "", Qr: ""}
+    if TicketType == "Single" {
+      tk.Src = "https://fidebleb.sirv.com/tickets/Private_Single.jpg"
+    }else if TicketType == "Couples" {
+      tk.Src = "https://fidebleb.sirv.com/tickets/Private_Couples.jpg"
+    }else {
+      fmt.Fprintf(w, "Invalid ticket type")
+      return
+    }
     db, err := sql.Open("mysql", DBcreds)
     if err != nil {
       fmt.Fprintf(w, `<script>window.location.href = "/500";</script>`)
@@ -113,7 +123,8 @@ func ForgetTicket(w http.ResponseWriter, r *http.Request) {
     if res.Next() == true {
       var ticket string
       res.Scan(&ticket)
-      qr.Execute(w, url.QueryEscape(ticket))
+      tk.Qr = url.QueryEscape(ticket)
+      qr.Execute(w, tk)
     }else if res.Next() == false {
       fmt.Fprintf(w, `<script>alert("ther is no ticket with this information");window.location.href = "/forget"</script>`)
     }
