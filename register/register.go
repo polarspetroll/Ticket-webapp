@@ -9,17 +9,23 @@ import (
   "crypto/rand"
   "unsafe"
 )
-var name, username, password, DBcreds, token string
+type Ticket struct {
+  Src string
+  Qr string
+}
+var name, username, password, DBcreds, token, TicketType string
 var alphabet = []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ12890")
 func Register(w http.ResponseWriter, r *http.Request) {
   Template := template.Must(template.ParseGlob("templates/register.html"))
   qr, _ := template.ParseFiles("templates/ticket.html")
   if r.Method == "POST" {
+    tk := Ticket{Src: "", Qr: ""}
     r.ParseForm()
     name = r.PostForm.Get("name")
     username = r.PostForm.Get("username")
     password = r.PostForm.Get("password")
     token = r.PostForm.Get("token")
+    TicketType = r.PostForm.Get("type")
     if len(name) > 30 {
       fmt.Fprintf(w, `<script>alert("name is too long")</script>`)
       return
@@ -28,6 +34,14 @@ func Register(w http.ResponseWriter, r *http.Request) {
       return
     }else if len(password) > 50 {
       fmt.Fprintf(w, `<script>alert("password is too long")</script>`)
+      return
+    }
+    if TicketType == "Single" {
+      tk.Src = "https://fidebleb.sirv.com/tickets/Private_Single.jpg"
+    }else if TicketType == "Couples" {
+      tk.Src = "https://fidebleb.sirv.com/tickets/Private_Couples.jpg"
+    }else {
+      fmt.Fprintf(w, "Invalid ticket type")
       return
     }
     DB, err := sql.Open("mysql", DBcreds)
@@ -66,7 +80,8 @@ func Register(w http.ResponseWriter, r *http.Request) {
     }
     res.Close()
     DB.Close()
-    qr.Execute(w, url.QueryEscape(ticket))
+    tk.Qr = url.QueryEscape(ticket)
+    qr.Execute(w, tk)
     ticket = ""
   }else if r.Method == "GET" {
     Template.Execute(w, "")
