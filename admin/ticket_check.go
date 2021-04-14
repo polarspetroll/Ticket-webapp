@@ -96,7 +96,7 @@ func TokenInsert(w http.ResponseWriter, r *http.Request) {
     tmp.Execute(w, "token exist!")
     return
   }
-  q, err = db.Query("INSERT INTO tokens VALUES(?)", token)
+  q, err = db.Query("INSERT INTO tokens(token_id) VALUES(?)", token)
   if err != nil {
     fmt.Fprintf(w, `<script>window.location.href = "/500";</script>`)
     panic(err.Error())

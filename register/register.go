@@ -60,12 +60,16 @@ func Register(w http.ResponseWriter, r *http.Request) {
       fmt.Fprintf(w, `<script>alert("username exist");window.location.href = "/register";</script>`)
       return
     }
-    res, _ = DB.Query("SELECT * FROM tokens WHERE token_id=?", token)
-    if res.Next() == false {
-      fmt.Fprintf(w, `<script>alert("Invalid Token");window.location.href = "/register";</script>`)
+    res, _ = DB.Query("SELECT token_id FROM tokens WHERE token_id=? AND used=0", token)
+    if res.Next() == true {
+      _, err = DB.Query("UPDATE tokens SET used=true WHERE token_id=?", token)
+      if err != nil {
+        fmt.Fprintf(w, `<script>window.location.href = "/500";</script>`)
+      }
+    }else if res.Next() == false {
+      fmt.Fprintf(w, `<script>alert("Invalid Token or Already Used");window.location.href = "/register";</script>`)
       return
     }
-    res.Close()
     b := make([]byte, 40)
     rand.Read(b)
     for i := 0; i < 40; i++ {

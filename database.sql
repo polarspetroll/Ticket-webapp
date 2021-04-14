@@ -10,5 +10,6 @@ CREATE TABLE tickets (
 );
 
 CREATE TABLE tokens (
-  token_id VARCHAR(100) UNIQUE
+  token_id VARCHAR(100) UNIQUE,
+  used BOOLEAN DEFAULT false
 );
