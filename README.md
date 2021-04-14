@@ -1,10 +1,11 @@
 # Installation :
 
 ```bash
+go get -u github.com/go-sql-driver/mysql
 go build -o main
-export DBUSR='your database username'  #//
-export DBPWD='your database password'  #//for running as a service add this lines to .bashrc file
-export DBADDR='your database address'  #//
+export DBUSR='your database username'
+export DBPWD='your database password'  
+export DBADDR='your database address' 
 ./main
 
 ```
@@ -29,21 +30,15 @@ CREATE TABLE tickets (
   sold BOOLEAN
 );
 CREATE TABLE tokens (
-  token_id VARCHAR(100) UNIQUE
+  token_id VARCHAR(100) UNIQUE,
+  used BOOLEAN DEFAULT false
 );
 
 
 ```
 
-- **DATABASE TYPE** : <strong style="color:cyan;;">MYSQL</strong>
+- **DATABASE TYPE** : MYSQL
 - <strong><a style="color:cyan;" href="https://github.com/go-sql-driver/mysql">SQL Driver</a></strong>
 ---
 - **Default Port** : 8080
-- **Admin Pannel** : /admin/
 - **Dynamics** : templates/*.html
-
-##### Report Bugs :
-
-- [github](https://github.com/polarspetroll)
-- [email](mailto:polarspetroll@protonmail.com)
-- [website](https://polarspetroll.github.io)
