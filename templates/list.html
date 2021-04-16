@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>List of Tickets</title>
+</head>
+<body style="background-color: gray;">
+<table>
+  <tr>
+    <th>Ticket&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>Username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> 
+    <th>Name</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check in status</th>
+  </tr>
+</table>
+<br/>
+<br/>
+<hr/>
+	<div style="width: 480px; float:left; height:100px; background:gray; margin:10px">
+		{{range .Ticket}}
+		<p>{{.}}</p>
+		{{end}}
+</div>
+	<div style="width: 350px; float:left; height:100px; background:gray; margin:10px">
+		{{range .Username}}
+		<p>{{.}}</p>
+		{{end}}
+</div>
+	<div style="width: 150px; float:left; height:100px; background:gray; margin:10px">
+		{{range .Name}}
+		<p>{{.}}</p>
+		{{end}}
+</div>
+	<div style="width: 1px; float:left; height:100px; background:gray; margin:10px">
+		{{range .Stat}}
+		<p>{{.}}</p>
+		{{end}}
+</div>
+</body>
+</html>
+

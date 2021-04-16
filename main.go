@@ -4,6 +4,7 @@ import (
   "net/http"
   "./admin"
   "./register"
+  "./list"
   "os"
   "html/template"
   "fmt"
@@ -17,6 +18,7 @@ func main() {
 
   admin.DBcreds = fmt.Sprintf("%v:%v@tcp(%v:3306)/%v", dbusr, dbpasswd, dbaddr, dbname)
   register.DBcreds = fmt.Sprintf("%v:%v@tcp(%v:3306)/%v", dbusr, dbpasswd, dbaddr, dbname)
+  list.D = fmt.Sprintf("%v:%v@tcp(%v:3306)/%v", dbusr, dbpasswd, dbaddr, dbname)
 
   http.HandleFunc("/", Redirect)
   http.HandleFunc("/register", register.Register)
@@ -27,6 +29,7 @@ func main() {
   http.HandleFunc("/admin/ticket_verify/", admin.Admin)
   http.HandleFunc("/admin/token/", admin.TokenInsert)
   http.HandleFunc("/admin/delete", admin.Delete)
+  http.HandleFunc("/admin/list", list.Table)
   http.ListenAndServe(":8080", nil)
                         //// You can change the listener port here
 }
