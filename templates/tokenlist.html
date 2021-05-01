@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>List of Tickets</title>
+</head>
+<body style="background-color: gray;">
+<table>
+  <tr>
+    <th>Transaction Token&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+  </tr>
+</table>
+<br/>
+<br/>
+<hr/>
+	<div style="width: 600px; float:left; height:100px; background:gray; margin:10px">
+		{{range .Token}}
+		<p>{{.}}</p>
+		{{end}}
+</div>
+	<div style="width: 350px; float:left; height:100px; background:gray; margin:10px">
+		{{range .Used}}
+		<p>{{.}}</p>
+		{{end}}
+</div>
+</body>
+</html>

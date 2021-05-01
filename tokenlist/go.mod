@@ -1,4 +1,4 @@
-module list
+module tokenlist
 
 go 1.15
 

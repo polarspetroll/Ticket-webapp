@@ -8,17 +8,19 @@ import (
 	"net/http"
 	"os"
 	"register"
+	"tokenlist"
 )
 
 func main() {
 	dbusr := os.Getenv("DBUSR")
 	dbpasswd := os.Getenv("DBPWD")
 	dbaddr := os.Getenv("DBADDR")
-	dbname := "ticket"
-
-	admin.DBcreds = fmt.Sprintf("%v:%v@tcp(%v:3306)/%v", dbusr, dbpasswd, dbaddr, dbname)
-	register.DBcreds = fmt.Sprintf("%v:%v@tcp(%v:3306)/%v", dbusr, dbpasswd, dbaddr, dbname)
-	list.D = fmt.Sprintf("%v:%v@tcp(%v:3306)/%v", dbusr, dbpasswd, dbaddr, dbname)
+	dbname := os.Getenv("DBNAME")
+	Database := fmt.Sprintf("%v:%v@tcp(%v:3306)/%v", dbusr, dbpasswd, dbaddr, dbname)
+	admin.DBcreds = Database
+	register.DBcreds = Database
+	list.D = Database
+	tokenlist.D = Database
 
 	http.HandleFunc("/", Redirect)
 	http.HandleFunc("/register", register.Register)
@@ -30,6 +32,7 @@ func main() {
 	http.HandleFunc("/admin/token/", admin.TokenInsert)
 	http.HandleFunc("/admin/delete", admin.Delete)
 	http.HandleFunc("/admin/list", list.Table)
+	http.HandleFunc("/admin/tokens", tokenlist.Table)
 	http.ListenAndServe(":8080", nil)
 	//// You can change the listener port here
 }
