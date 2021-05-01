@@ -6,6 +6,7 @@ go build -o main
 export DBUSR='your database username'
 export DBPWD='your database password'  
 export DBADDR='your database address' 
+export DBNAME='database name' 
 ./main
 
 ```
